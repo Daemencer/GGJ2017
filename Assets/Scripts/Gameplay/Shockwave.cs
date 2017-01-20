@@ -16,6 +16,10 @@ public class Shockwave : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
 			{
+				// unzoom the camera. Will be done somewhere else after that
+				//GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
+				//cam.transform.Translate(new Vector3(0.0f, 5.0f, -10.0f));
+
 				explosionPos = hit.point;
 
 				int layerMaskExplosion = 1 << LayerMask.NameToLayer("Ground");
@@ -30,7 +34,7 @@ public class Shockwave : MonoBehaviour
 					if (rb != null)
 					{
 						Debug.Log("Adding Force");
-						rb.AddExplosionForce(50.0f, explosionPos, 10.0f, 0.0f, ForceMode.Impulse);
+						rb.AddExplosionForce(30.0f, explosionPos, 10.0f, 0.0f, ForceMode.Impulse);
 					}
 				}
 			}
