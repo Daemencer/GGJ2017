@@ -32,7 +32,7 @@ public class Shockwave : MonoBehaviour
 					Rigidbody rb = col.GetComponent<Rigidbody>();
 
 					if (rb != null)
-						rb.AddExplosionForce(30.0f, explosionPos, 10.0f, 0.0f, ForceMode.Impulse);
+						rb.AddExplosionForce(40.0f, explosionPos, 10.0f, 0.0f, ForceMode.Impulse);
 				}
 			}
 

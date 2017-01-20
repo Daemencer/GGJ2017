@@ -11,6 +11,14 @@ public class BlobBehavior : MonoBehaviour
 
 	public event CreatureEvent OnCreatureDeath;
 
+
+	public void Action()
+	{
+		OnCreatureDeath.Invoke(score);
+		Destroy(gameObject);
+	}
+
+
 	private void Start()
 	{
 		OnCreatureDeath += ScoreManager.Instance.UpdateScore;
@@ -21,8 +29,7 @@ public class BlobBehavior : MonoBehaviour
 	{
 		if (col.gameObject.tag == "Prop")
 		{
-			OnCreatureDeath.Invoke(score);
-			Destroy(gameObject);
+			Action();
 		}
 	}
 }

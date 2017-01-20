@@ -6,6 +6,7 @@ public enum SpawnType
 {
 	CREATURE,
 	PROP,
+	BOMB,
 
 	NB
 }
@@ -40,6 +41,11 @@ public class GenericSpawner : MonoBehaviour
 		else if (type == SpawnType.PROP)
 		{
 			Gizmos.color = Color.green;
+			Gizmos.DrawCube(transform.position, new Vector3(1.0f, 1.0f, 1.0f));
+		}
+		else if (type == SpawnType.BOMB)
+		{
+			Gizmos.color = Color.blue;
 			Gizmos.DrawCube(transform.position, new Vector3(1.0f, 1.0f, 1.0f));
 		}
 	}

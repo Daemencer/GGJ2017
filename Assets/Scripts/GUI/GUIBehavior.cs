@@ -8,7 +8,6 @@ public class GUIBehavior : MonoBehaviour
 	[Tooltip("The text object that will display the score.")]
 	public Text scoreText;
 
-
 	private void Start()
 	{
 		scoreText.text = "Score: 000";
