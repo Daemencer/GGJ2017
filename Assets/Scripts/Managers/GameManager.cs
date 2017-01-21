@@ -59,16 +59,6 @@ public class GameManager : MonoSingleton<GameManager>
 		private set
 		{
 			currentShockwaveAmmo = value;
-
-			if (value == 0)
-			{
-				GameState previousState = CurrentGameState;
-				CurrentGameState = GameState.OVER;
-
-				if (OnGameOver != null)
-					OnGameOver(previousState);
-
-			}
 		}
 	}
 	#endregion
@@ -112,6 +102,19 @@ public class GameManager : MonoSingleton<GameManager>
 	}
 
 
+	private void CarnageDone()
+	{
+		if (CurrentShockwaveAmmo <= 0)
+		{
+			GameState previousState = CurrentGameState;
+			CurrentGameState = GameState.OVER;
+
+			if (OnGameOver != null)
+				OnGameOver(previousState);
+		}
+	}
+
+
 	private void Reset()
 	{
 		CurrentShockwaveAmmo = ShockwaveAmmo;	
@@ -123,6 +126,12 @@ public class GameManager : MonoSingleton<GameManager>
 	{
 		CurrentGameState = GameState.START;
 		Reset();
+	}
+
+
+	private void Start()
+	{
+		OnSceneMovementEnd += CarnageDone;
 	}
 
 

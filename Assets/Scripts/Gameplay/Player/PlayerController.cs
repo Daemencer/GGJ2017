@@ -31,11 +31,11 @@ public class PlayerController : MonoBehaviour
 		crosshairHeight = aimPointer.height;
 		crosshairPixels = aimPointer.GetPixels();
 
-		for (int i = 0; i < 10000; ++i)
-		{
-			if (crosshairPixels[i] != Color.black)
-				crosshairPixels[i] = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-		}
+		//for (int i = 0; i < crosshairWidth * crosshairHeight; ++i)
+		//{
+		//	if (crosshairPixels[i] != Color.black)
+		//		crosshairPixels[i] = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+		//}
 
 		GameManager.Instance.OnGameStateChange += GameStateChanged;
 
