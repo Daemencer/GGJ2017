@@ -10,6 +10,9 @@ public class BombBehavior : MonoBehaviour
 		{
 			StartCoroutine(Explosion());
 
+			JuicePimp.Instance.ScreenShake(3.0f, 12.0f, 0.7f);
+			JuicePimp.Instance.SlowMotion(1.0f, 3.0f);
+
 			Destroy(gameObject);
 		}
 	}
@@ -23,21 +26,19 @@ public class BombBehavior : MonoBehaviour
 
 		Collider[] colliders = Physics.OverlapSphere(explosionPos, 20.0f, layerMaskExplosion);
 
-		Debug.Log(colliders.Length);
-
 		foreach (Collider collider in colliders)
 		{
 			// if it's a blob, we gon' blow this shit up
-			if (collider.gameObject.tag == "Blob")
-			{
-				collider.gameObject.GetComponent<BlobBehavior>().Action();
-			}
-			else
+			//if (collider.gameObject.tag == "Blob")
+			//{
+			//	collider.gameObject.GetComponent<BlobBehavior>().Action();
+			//}
+			//else
 			{
 				Rigidbody rb = collider.GetComponent<Rigidbody>();
 
 				if (rb != null)
-					rb.AddExplosionForce(40.0f, explosionPos, 10.0f, 0.0f, ForceMode.Impulse);
+					rb.AddExplosionForce(30.0f, explosionPos, 10.0f, 0.0f, ForceMode.Impulse);
 			}
 		}
 
