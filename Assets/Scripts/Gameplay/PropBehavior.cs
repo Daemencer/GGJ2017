@@ -30,23 +30,37 @@ public class PropBehavior : MonoBehaviour
 		{
 			if (rb.velocity != Vector3.zero)
 			{
+				moving = true;
+
 				if (OnObjectMove != null)
 				{
 					OnObjectMove.Invoke();
-					Debug.Log("Starting to move");
 				}
 			}
 		}
 		else
 		{
+			//Debug.Log(gameObject.name + " is moving at "+ rb.velocity);
+
 			if (rb.velocity == Vector3.zero)
 			{
+				moving = false;
+
 				if (OnObjectStop != null)
 				{
 					OnObjectStop.Invoke();
-					Debug.Log("Starting to move");
 				}
 			}
+		}
+	}
+
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.tag == "GarbageCollector")
+		{
+			OnObjectStop.Invoke();
+			Destroy(gameObject);
 		}
 	}
 }
