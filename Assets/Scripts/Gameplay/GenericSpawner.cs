@@ -23,6 +23,7 @@ public class GenericSpawner : MonoBehaviour
 		if (SpawnedPrefab != null)
 		{
 			GameObject gao = GameObject.Instantiate(SpawnedPrefab, transform.position, Quaternion.identity) as GameObject;
+			gao.transform.rotation = transform.rotation;
 			gao.transform.localScale = Vector3.one;
 
 			// Destroys the spawner after it has spawned its object
