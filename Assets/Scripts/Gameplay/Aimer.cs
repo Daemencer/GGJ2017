@@ -125,7 +125,10 @@ public class Aimer : MonoSingleton<Aimer>
 	{
 		// proceed to next phase if we press space
 		if (Input.GetKeyDown(KeyCode.F))
-			Proceed();
+		{
+			if (phase == AimPhase.FIRST || phase == AimPhase.SECOND)
+				Proceed();
+		}
 
 		if (phase == AimPhase.FIRST)
 		{

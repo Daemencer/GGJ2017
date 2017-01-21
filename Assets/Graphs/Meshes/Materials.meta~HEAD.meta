@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Graphs/Meshes/Materials.meta~HEAD.meta
 guid: a8ca382fc324019498a546980f229687
 timeCreated: 1485030629
+=======
+guid: 2f6adcf16fd4ec643873f82deea993dc
+timeCreated: 1485030712
+>>>>>>> e7b71b95ff8c35553200fcc73f8542679c395fdb:Assets/Mesh 3D/Materials/Arbres_initialShadingGroup1.mat.meta
 licenseType: Free
 DefaultImporter:
   userData: 
