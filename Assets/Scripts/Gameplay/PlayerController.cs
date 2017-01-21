@@ -15,17 +15,26 @@ public class PlayerController : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
-			RaycastHit hit;
-			int layerMask = 1 << LayerMask.NameToLayer("Ground");
-
-			if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
-			{
-				int explosionLayerMask = 1 << LayerMask.NameToLayer("Ground");
-				explosionLayerMask = ~explosionLayerMask;
-
-				Shockwave.Blast(hit.point, BlastRadius, BlastForce, BlastUpwardModifier, explosionLayerMask);
-			}
+			if (GameManager.Instance.CurrentGameState == GameState.RUNNING)
+				FireShockwave(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
 		}
+	}
+
+
+	private void FireShockwave(Vector3 impactPoint)
+	{
+		Ray ray = Camera.main.ScreenPointToRay(new Vector3(impactPoint.x, impactPoint.y, 0.0f));
+		RaycastHit hit;
+		int layerMask = 1 << LayerMask.NameToLayer("Ground");
+
+		if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
+		{
+			int explosionLayerMask = 1 << LayerMask.NameToLayer("Ground");
+			explosionLayerMask = ~explosionLayerMask;
+
+			Shockwave.Blast(hit.point, BlastRadius, BlastForce, BlastUpwardModifier, explosionLayerMask);
+		}
+
+		GameManager.Instance.ShockwaveFired();
 	}
 }
