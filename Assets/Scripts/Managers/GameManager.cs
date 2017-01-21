@@ -128,8 +128,6 @@ public class GameManager : MonoSingleton<GameManager>
 
 	private void Update()
 	{
-		Debug.Log("GameState: " + currentGameState);
-
 		if (currentGameState == GameState.START)
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
