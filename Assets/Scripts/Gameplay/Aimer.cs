@@ -98,8 +98,6 @@ public class Aimer : MonoSingleton<Aimer>
 
 		xDirection = 1.0f;
 		yDirection = 1.0f;
-
-		Proceed();
 	}
 
 
@@ -128,19 +126,25 @@ public class Aimer : MonoSingleton<Aimer>
 				Proceed();
 		}
 
-		if (phase == AimPhase.FIRST)
-		{
-			if (projector.transform.position.x >= 50.0f || projector.transform.position.x <= -50.0f)
-				xDirection *= -1.0f;
+		if (GameManager.Instance.CurrentGameState == GameState.RUNNING && phase == AimPhase.DONE && canShoot)
+			phase = AimPhase.FIRST;
 
-			projector.transform.Translate(speed * Time.fixedDeltaTime * xDirection, 0.0f, 0.0f, Space.Self);
-		}
-		else if (phase == AimPhase.SECOND)
+		if (GameManager.Instance.CurrentGameState == GameState.RUNNING && canShoot)
 		{
-			if (projector.transform.localPosition.y >= 50.0f || projector.transform.localPosition.y <= -50.0f)
-				yDirection *= -1.0f;
+			if (phase == AimPhase.FIRST)
+			{
+				if (projector.transform.position.x >= 50.0f || projector.transform.position.x <= -50.0f)
+					xDirection *= -1.0f;
 
-			projector.transform.Translate(new Vector3(0.0f, speed * Time.fixedDeltaTime * yDirection, 0.0f), Space.Self);
+				projector.transform.Translate(speed * Time.fixedDeltaTime * xDirection, 0.0f, 0.0f, Space.Self);
+			}
+			else if (phase == AimPhase.SECOND)
+			{
+				if (projector.transform.localPosition.y >= 50.0f || projector.transform.localPosition.y <= -50.0f)
+					yDirection *= -1.0f;
+
+				projector.transform.Translate(new Vector3(0.0f, speed * Time.fixedDeltaTime * yDirection, 0.0f), Space.Self);
+			}
 		}
 	}
 	#endregion
