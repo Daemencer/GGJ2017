@@ -60,8 +60,6 @@ public class Aimer : MonoSingleton<Aimer>
 	{
 		if (GameManager.Instance.CurrentGameState == GameState.RUNNING && canShoot)
 		{
-			Debug.Log("Imma firin my lasaaaah");
-
 			Ray ray = new Ray(projector.transform.position, Vector3.down);
 			RaycastHit hit;
 			int layerMask = 1 << LayerMask.NameToLayer("Ground");
