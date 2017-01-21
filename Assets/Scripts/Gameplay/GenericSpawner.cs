@@ -53,6 +53,11 @@ public class GenericSpawner : MonoBehaviour
 		Gizmos.color = Color.white;
 		Gizmos.DrawLine(transform.position, transform.position + (1.0f * transform.forward));
 
-		Gizmos.DrawMesh(SpawnedPrefab.transform.GetComponentInChildren<MeshFilter>().sharedMesh, transform.position, transform.rotation, Vector3.one);
+		MeshFilter[] meshFilters = SpawnedPrefab.transform.GetComponentsInChildren<MeshFilter>();
+
+		for (int i = 0; i < meshFilters.Length; ++i)
+		{
+			Gizmos.DrawMesh(meshFilters[i].sharedMesh, meshFilters[i].gameObject.transform.position, meshFilters[i].gameObject.transform.rotation, meshFilters[i].gameObject.transform.localScale);
+		}
 	}
 }
