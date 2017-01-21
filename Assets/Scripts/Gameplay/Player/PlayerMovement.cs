@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Camera Related")]
 	[SerializeField, Tooltip("The pivot point for the camera.")]
 	private GameObject pivot;
+	[SerializeField, Tooltip("The actual camera")]
+	private GameObject camera;
 
 	[SerializeField, Tooltip("How high the camera will be.")]
 	private float cameraHeight = 50.0f;
@@ -19,8 +21,11 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField, Tooltip("How fast the player travels around the rail.")]
 	private float speed = 10.0f;
 
-	#region Private
+	[SerializeField, Tooltip("Camera Angle")]
 	private float angle = 0.0f;
+
+	#region Private
+	private float camAngle = 60.0f;
 
 	private Transform initialTransform;
 	#endregion
@@ -29,7 +34,11 @@ public class PlayerMovement : MonoBehaviour
 	private void Start()
 	{
 		// set the initial position and rotation
-		pivot.transform.position = new Vector3(0.0f, 50.0f, -45.0f);
+		pivot.transform.localPosition = new Vector3(0.0f, cameraHeight, -radius);
+		pivot.transform.localEulerAngles = Vector3.zero;
+
+		camera.transform.localPosition = Vector3.zero;
+		camera.transform.localEulerAngles = new Vector3(camAngle, 0.0f, 0.0f);
 
 		// save it
 		initialTransform = pivot.transform;
@@ -61,10 +70,8 @@ public class PlayerMovement : MonoBehaviour
 #if UNITY_EDITOR
 	private void OnDrawGizmos()
 	{
-		// draw the rail preview
 		Handles.color = Color.green;
 		Handles.DrawWireDisc(new Vector3(0.0f, cameraHeight, 0.0f), pivot.transform.up, radius);
-		//Gizmos.DrawFrustum(new Vector3(radius, cameraHeight, radius), 60.0f, 1000.0f, 0.3f, 1.0f);
 	}
 #endif
 }
