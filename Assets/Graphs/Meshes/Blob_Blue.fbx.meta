@@ -6,10 +6,19 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Eyes_Blue
+    100004: Blob_Blue 1
     400000: //RootNode
+    400002: Eyes_Blue
+    400004: Blob_Blue 1
     2300000: //RootNode
+    2300002: Eyes_Blue
+    2300004: Blob_Blue 1
     3300000: //RootNode
+    3300002: Eyes_Blue
+    3300004: Blob_Blue 1
     4300000: Blob_Blue
+    4300002: Eyes_Blue
     7400000: Take 001
     9500000: //RootNode
   materials:
