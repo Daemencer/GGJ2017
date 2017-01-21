@@ -18,7 +18,8 @@ public class GenericSpawner : MonoBehaviour
 
 	public SpawnType type;
 
-	void Start()
+
+	public void ExecSpawn()
 	{
 		if (SpawnedPrefab != null)
 		{
@@ -26,9 +27,15 @@ public class GenericSpawner : MonoBehaviour
 			gao.transform.rotation = transform.rotation;
 			gao.transform.localScale = Vector3.one;
 
-			// Destroys the spawner after it has spawned its object
-			Destroy(gameObject);
+			GameManager.Instance.RegisterObject(gao);
 		}
+	}
+
+
+	void Start()
+	{
+		GameManager.Instance.RegisterSpawner(gameObject);
+		ExecSpawn();
 	}
 
 

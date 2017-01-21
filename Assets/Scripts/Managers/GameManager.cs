@@ -24,6 +24,8 @@ public class GameManager : MonoSingleton<GameManager>
 
 	public event GameEvent OnSceneMovementStart;
 	public event GameEvent OnSceneMovementEnd;
+
+	public event GameEvent OnGameReset;
 	#endregion
 
 	#region Fields
@@ -36,6 +38,11 @@ public class GameManager : MonoSingleton<GameManager>
 
 	// keeps count of how many objects are moving in the scene
 	private int movingEntities = 0;
+
+
+	private List<GameObject> spawnedObjects;
+
+	private List<GameObject> spawners;
 	#endregion
 
 	#region Properties
@@ -90,6 +97,18 @@ public class GameManager : MonoSingleton<GameManager>
 	}
 
 
+	public void RegisterObject(GameObject gao)
+	{
+		spawnedObjects.Add(gao);
+	}
+
+
+	public void RegisterSpawner(GameObject gao)
+	{
+		spawners.Add(gao);
+	}
+
+
 	public bool CanFire()
 	{
 		return CurrentShockwaveAmmo > 0;
@@ -117,14 +136,36 @@ public class GameManager : MonoSingleton<GameManager>
 
 	private void Reset()
 	{
-		CurrentShockwaveAmmo = ShockwaveAmmo;	
+		CurrentShockwaveAmmo = ShockwaveAmmo;
+
+		for (int i = spawnedObjects.Count; i > 0; --i)
+		{
+			Destroy(spawnedObjects[i - 1]);
+		}
+
+		foreach (GameObject gao in spawners)
+		{
+			GenericSpawner genericSpawner = gao.GetComponent<GenericSpawner>();
+
+			if (genericSpawner != null)
+			{
+				genericSpawner.ExecSpawn();
+			}
+		}
+		
+		if (OnGameReset != null)
+			OnGameReset.Invoke();
 	}
 	#endregion
 
 	#region Unity Methods
 	private void Awake()
 	{
+		spawnedObjects = new List<GameObject>();
+		spawners = new List<GameObject>();
+
 		CurrentGameState = GameState.START;
+
 		Reset();
 	}
 
