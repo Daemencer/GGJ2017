@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public Texture2D aimPointer;
-	public Texture2D groundTex;
+	public Material groundTex;
 
 	[SerializeField, Tooltip("How strong the blast will be")]
 	private float BlastForce = 30.0f;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
-		Texture2D texture = Instantiate(groundTex) as Texture2D;
+		Texture2D texture = Instantiate(groundTex.mainTexture) as Texture2D;
 		GameObject.Find("Ground").GetComponent<MeshRenderer>().material.mainTexture = texture;
 
 		crosshairWidth = aimPointer.width;
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 			int explosionLayerMask = 1 << LayerMask.NameToLayer("Ground");
 			explosionLayerMask = ~explosionLayerMask;
 
-			//DrawTry(hit);
+			DrawTry(hit);
 
 			Shockwave.Blast(hit.point, BlastRadius, BlastForce, BlastUpwardModifier, explosionLayerMask);
 		}

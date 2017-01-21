@@ -128,7 +128,7 @@ public class GameManager : MonoSingleton<GameManager>
 
 	private void Update()
 	{
-		Debug.Log("GameState: " + currentGameState);
+		Debug.Log(movingEntities);
 
 		if (currentGameState == GameState.START)
 		{
