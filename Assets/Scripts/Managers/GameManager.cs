@@ -11,24 +11,31 @@ public enum GameState
 	NB
 }
 
-public delegate void GameEvent(GameState previousState);
+public delegate void GameStateEvent(GameState previousState);
+public delegate void GameEvent();
 
 public class GameManager : MonoSingleton<GameManager>
 {
 	#region Events
-	public event GameEvent OnGameStateChange;
+	public event GameStateEvent OnGameStateChange;
 
-	public event GameEvent OnGameBegins;
-	public event GameEvent OnGameOver;
+	public event GameStateEvent OnGameBegins;
+	public event GameStateEvent OnGameOver;
+
+	public event GameEvent OnSceneMovementStart;
+	public event GameEvent OnSceneMovementEnd;
 	#endregion
 
 	#region Fields
 	[SerializeField, Tooltip("The amount of times you can send a shockwave from user input")]
 	private int ShockwaveAmmo = 3;
 
-	private int CurrentShockwaveAmmo;
+	private int currentShockwaveAmmo;
 
 	private GameState currentGameState;
+
+	// keeps count of how many objects are moving in the scene
+	private int movingEntities = 0;
 	#endregion
 
 	#region Properties
@@ -37,26 +44,71 @@ public class GameManager : MonoSingleton<GameManager>
 		get { return currentGameState; }
 		private set
 		{
-			if (OnGameStateChange != null)
-				OnGameStateChange(currentGameState);
-
+			GameState previousState = currentGameState;
 			currentGameState = value;
+
+			if (OnGameStateChange != null)
+				OnGameStateChange(previousState);
+		}
+	}
+
+
+	public int CurrentShockwaveAmmo
+	{
+		get { return currentShockwaveAmmo; }
+		private set
+		{
+			currentShockwaveAmmo = value;
+
+			if (value == 0)
+			{
+				GameState previousState = CurrentGameState;
+				CurrentGameState = GameState.OVER;
+
+				if (OnGameOver != null)
+					OnGameOver(previousState);
+
+			}
 		}
 	}
 	#endregion
 
 	#region Methods
+	public void ObjectMoving()
+	{
+		if (movingEntities == 0)
+		{
+			if (OnSceneMovementStart != null)
+				OnSceneMovementStart.Invoke();
+		}
+
+		++movingEntities;
+	}
+
+
+	public void ObjectStopping()
+	{
+		--movingEntities;
+
+		if (movingEntities <= 0)
+		{
+			movingEntities = 0;
+
+			if (OnSceneMovementEnd != null)
+				OnSceneMovementEnd.Invoke();
+		}
+	}
+
+
+	public bool CanFire()
+	{
+		return CurrentShockwaveAmmo > 0;
+	}
+
+
 	public void ShockwaveFired()
 	{
-		if (CurrentShockwaveAmmo > 0)
-			--CurrentShockwaveAmmo;
-		else
-		{ 
-			if (OnGameOver != null)
-				OnGameOver(currentGameState);
-
-			CurrentGameState = GameState.OVER;
-		}
+		--CurrentShockwaveAmmo;
 	}
 
 
@@ -69,7 +121,7 @@ public class GameManager : MonoSingleton<GameManager>
 	#region Unity Methods
 	private void Awake()
 	{
-		currentGameState = GameState.START;
+		CurrentGameState = GameState.START;
 		Reset();
 	}
 
