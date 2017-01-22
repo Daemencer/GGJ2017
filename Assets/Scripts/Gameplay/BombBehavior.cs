@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class BombBehavior : MonoBehaviour
 {
+	public GameObject shockwaveParticle;
+
 	private void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Prop")
 		{
 			StartCoroutine(Explosion());
+
+			GameObject gao = GameObject.Instantiate<GameObject>(shockwaveParticle);
+			gao.transform.position = transform.position;
 
 			JuicePimp.Instance.ScreenShake(3.0f, 12.0f, 0.7f);
 			JuicePimp.Instance.SlowMotion(1.0f, 3.0f);
