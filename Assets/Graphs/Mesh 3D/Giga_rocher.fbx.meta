@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 936a6a68fc3a9ee42b3b5fcffc5a23e1
-timeCreated: 1485053659
+guid: d140b7eeeabbfac46b7e754341817a7d
+timeCreated: 1485055737
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Orange_Socle:pSphere2
+    4300000: pCube14
     9500000: //RootNode
   materials:
     importMaterials: 1

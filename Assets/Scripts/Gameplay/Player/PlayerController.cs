@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		Material material = Instantiate(groundMat) as Material;
-		GameObject.Find("Ground").GetComponent<MeshRenderer>().material.mainTexture = material.mainTexture;
+		GameObject.Find("Ground2").GetComponent<MeshRenderer>().material.mainTexture = material.mainTexture;
 
 		crosshairWidth = aimPointer.width;
 		crosshairHeight = aimPointer.height;
