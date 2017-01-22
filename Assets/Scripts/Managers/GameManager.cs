@@ -145,6 +145,8 @@ public class GameManager : MonoSingleton<GameManager>
 
 		foreach (GameObject gao in spawners)
 		{
+			gao.SetActive(false);
+
 			GenericSpawner genericSpawner = gao.GetComponent<GenericSpawner>();
 
 			if (genericSpawner != null)

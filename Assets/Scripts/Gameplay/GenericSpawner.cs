@@ -28,6 +28,8 @@ public class GenericSpawner : MonoBehaviour
 			gao.transform.localScale = Vector3.one;
 
 			GameManager.Instance.RegisterObject(gao);
+
+			gameObject.SetActive(false);
 		}
 	}
 
