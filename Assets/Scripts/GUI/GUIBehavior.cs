@@ -7,6 +7,8 @@ public class GUIBehavior : MonoBehaviour
 {
 	[SerializeField, Tooltip("The text object that will display the score.")]
 	private Text scoreText;
+	[SerializeField, Tooltip("The text object that will display the current ammo count.")]
+	private Text ammoCountText;
 	[SerializeField, Tooltip("The Panel holding the Start Text")]
 	private GameObject menuPanel;
 	[SerializeField, Tooltip("The Panel holding the game over Text")]
@@ -17,6 +19,7 @@ public class GUIBehavior : MonoBehaviour
 		scoreText.text = "Score: 000";
 
 		ScoreManager.Instance.OnScoreChange += UpdateScoreTextValue;
+		GameManager.Instance.OnAmmoUsed += UpdateAmmoCountTextValue;
 		GameManager.Instance.OnGameStateChange += GameStateChanged;
 
 		Reset();
@@ -28,6 +31,12 @@ public class GUIBehavior : MonoBehaviour
 	private void UpdateScoreTextValue(int newValue)
 	{
 		scoreText.text = "Score: " + newValue.ToString();
+	}
+
+
+	private void UpdateAmmoCountTextValue(int value)
+	{
+		ammoCountText.text = "Shockwaves left: " + value.ToString();
 	}
 
 

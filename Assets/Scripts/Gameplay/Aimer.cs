@@ -37,6 +37,8 @@ public class Aimer : MonoSingleton<Aimer>
 	private float BlastRadius = 20.0f;
 	[SerializeField, Tooltip("How strong the up force will be on the blast")]
 	private float BlastUpwardModifier = 0.0f;
+	[SerializeField, Tooltip("The sound played on shockwave hit ground")]
+	private SoundPlayer shockwaveSound;
 
 	private bool canShoot = true;
 	#endregion
@@ -73,6 +75,9 @@ public class Aimer : MonoSingleton<Aimer>
 			}
 
 			GameManager.Instance.ShockwaveFired();
+
+			if (shockwaveSound != null)
+				shockwaveSound.PlaySound();
 		}
 	}
 

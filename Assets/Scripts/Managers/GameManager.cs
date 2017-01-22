@@ -13,6 +13,7 @@ public enum GameState
 
 public delegate void GameStateEvent(GameState previousState);
 public delegate void GameEvent();
+public delegate void WeaponEvent(int value);
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -26,6 +27,8 @@ public class GameManager : MonoSingleton<GameManager>
 	public event GameEvent OnSceneMovementEnd;
 
 	public event GameEvent OnGameReset;
+
+	public event WeaponEvent OnAmmoUsed;
 	#endregion
 
 	#region Fields
@@ -66,6 +69,9 @@ public class GameManager : MonoSingleton<GameManager>
 		private set
 		{
 			currentShockwaveAmmo = value;
+
+			if (OnAmmoUsed != null)
+				OnAmmoUsed(CurrentShockwaveAmmo);
 		}
 	}
 	#endregion
