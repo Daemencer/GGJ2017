@@ -15,6 +15,7 @@ public class BlobBehavior : MonoBehaviour
 	public void Action()
 	{
 		OnCreatureDeath.Invoke(score);
+
 		Destroy(gameObject);
 	}
 
