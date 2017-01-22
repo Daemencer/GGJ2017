@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CollisionScript : MonoBehaviour {
+public class CollisionScript : MonoBehaviour
+{
 	private int waveNumber;
 	public float distanceX, distanceZ;
 	public float[] waveAmplitude;
@@ -16,6 +17,39 @@ public class CollisionScript : MonoBehaviour {
 		mesh = GetComponent<MeshFilter>().mesh;
 	}
 	
+
+	public void Shockwave(Ray ray)
+	{
+		// testing
+		RaycastHit hit;
+		int layerMask = 1 << LayerMask.NameToLayer("Ground");
+
+		if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
+		{
+			waveNumber++;
+			if (waveNumber == 9)
+			{
+				waveNumber = 1;
+			}
+			waveAmplitude[waveNumber - 1] = 0;
+			distance[waveNumber - 1] = 0;
+
+			distanceX = this.transform.position.x - hit.point.x;
+			distanceZ = this.transform.position.z - hit.point.z;
+			impactPos[waveNumber - 1].x = hit.point.x;
+			impactPos[waveNumber - 1].y = hit.point.z;
+
+			GetComponent<Renderer>().material.SetFloat("_xImpact" + waveNumber, hit.point.x);
+			GetComponent<Renderer>().material.SetFloat("_zImpact" + waveNumber, hit.point.z);
+
+			GetComponent<Renderer>().material.SetFloat("_OffsetX" + waveNumber, distanceX / mesh.bounds.size.x * 2.5f);
+			GetComponent<Renderer>().material.SetFloat("_OffsetZ" + waveNumber, distanceZ / mesh.bounds.size.z * 2.5f);
+
+			GetComponent<Renderer>().material.SetFloat("_WaveAmplitude" + waveNumber, /*col.rigidbody.velocity.magnitude*/30.0f * magnitudeDivider);
+		}
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -34,65 +68,32 @@ public class CollisionScript : MonoBehaviour {
 				GetComponent<Renderer>().material.SetFloat("_WaveAmplitude" + (i+1), 0);
 				distance[i] = 0;
 			}
-
-		}
-
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			// testing
-			Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
-			RaycastHit hit;
-			int layerMask = 1 << LayerMask.NameToLayer("Ground");
-
-			if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
-			{
-				waveNumber++;
-				if (waveNumber == 9)
-				{
-					waveNumber = 1;
-				}
-				waveAmplitude[waveNumber - 1] = 0;
-				distance[waveNumber - 1] = 0;
-
-				distanceX = this.transform.position.x - hit.point.x;
-				distanceZ = this.transform.position.z - hit.point.z;
-				impactPos[waveNumber - 1].x = hit.point.x;
-				impactPos[waveNumber - 1].y = hit.point.z;
-
-				GetComponent<Renderer>().material.SetFloat("_xImpact" + waveNumber, hit.point.x);
-				GetComponent<Renderer>().material.SetFloat("_zImpact" + waveNumber, hit.point.z);
-
-				GetComponent<Renderer>().material.SetFloat("_OffsetX" + waveNumber, distanceX / mesh.bounds.size.x * 2.5f);
-				GetComponent<Renderer>().material.SetFloat("_OffsetZ" + waveNumber, distanceZ / mesh.bounds.size.z * 2.5f);
-
-				GetComponent<Renderer>().material.SetFloat("_WaveAmplitude" + waveNumber, /*col.rigidbody.velocity.magnitude*/30.0f * magnitudeDivider);
-			}
 		}
 	}
 
-	void OnCollisionEnter(Collision col){
-		if (col.rigidbody)
-		{
-			waveNumber++;
-			if (waveNumber == 9){
-				waveNumber = 1;
-			}
-			waveAmplitude[waveNumber-1] = 0;
-			distance[waveNumber-1] = 0;
+	//void OnCollisionEnter(Collision col){
+	//	if (col.rigidbody)
+	//	{
+	//		waveNumber++;
+	//		if (waveNumber == 9){
+	//			waveNumber = 1;
+	//		}
+	//		waveAmplitude[waveNumber-1] = 0;
+	//		distance[waveNumber-1] = 0;
 
-			distanceX = this.transform.position.x - col.gameObject.transform.position.x;
-			distanceZ = this.transform.position.z - col.gameObject.transform.position.z;
-			impactPos[waveNumber - 1].x = col.transform.position.x;
-			impactPos[waveNumber - 1].y = col.transform.position.z;
+	//		distanceX = this.transform.position.x - col.gameObject.transform.position.x;
+	//		distanceZ = this.transform.position.z - col.gameObject.transform.position.z;
+	//		impactPos[waveNumber - 1].x = col.transform.position.x;
+	//		impactPos[waveNumber - 1].y = col.transform.position.z;
 
-			GetComponent<Renderer>().material.SetFloat("_xImpact" + waveNumber, col.transform.position.x);
-			GetComponent<Renderer>().material.SetFloat("_zImpact" + waveNumber, col.transform.position.z);
+	//		GetComponent<Renderer>().material.SetFloat("_xImpact" + waveNumber, col.transform.position.x);
+	//		GetComponent<Renderer>().material.SetFloat("_zImpact" + waveNumber, col.transform.position.z);
 
-			GetComponent<Renderer>().material.SetFloat("_OffsetX" + waveNumber, distanceX / mesh.bounds.size.x * 2.5f);
-			GetComponent<Renderer>().material.SetFloat("_OffsetZ" + waveNumber, distanceZ / mesh.bounds.size.z * 2.5f);
+	//		GetComponent<Renderer>().material.SetFloat("_OffsetX" + waveNumber, distanceX / mesh.bounds.size.x * 2.5f);
+	//		GetComponent<Renderer>().material.SetFloat("_OffsetZ" + waveNumber, distanceZ / mesh.bounds.size.z * 2.5f);
 
-			GetComponent<Renderer>().material.SetFloat("_WaveAmplitude" + waveNumber, col.rigidbody.velocity.magnitude * magnitudeDivider);
+	//		GetComponent<Renderer>().material.SetFloat("_WaveAmplitude" + waveNumber, col.rigidbody.velocity.magnitude * magnitudeDivider);
 
-		}
-	}
+	//	}
+	//}
 }
