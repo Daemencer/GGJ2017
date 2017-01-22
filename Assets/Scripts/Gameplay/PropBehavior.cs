@@ -42,7 +42,7 @@ public class PropBehavior : MonoBehaviour
 		{
 			//Debug.Log(gameObject.name + " is moving at "+ rb.velocity);
 
-			if (rb.velocity == Vector3.zero)
+			if (rb.velocity.normalized.magnitude <= 0.1f)
 			{
 				moving = false;
 

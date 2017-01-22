@@ -49,7 +49,11 @@ public class GameManager : MonoSingleton<GameManager>
 
 
 	#region Sounds
+	private bool playingSquashSound = false;
+	public List<SoundPlayer> blobSplashSounds = new List<SoundPlayer>();
 
+	private bool playingPropSound = false;
+	public List<SoundPlayer> propSounds = new List<SoundPlayer>();
 	#endregion
 	#endregion
 
@@ -136,6 +140,50 @@ public class GameManager : MonoSingleton<GameManager>
 	{
 		if (OnSceneMovementEnd != null)
 			OnSceneMovementEnd.Invoke();
+	}
+
+
+	public void PlayRandomBlobSquashSound()
+	{
+		if (!playingSquashSound)
+		{
+			playingSquashSound = true;
+
+			int rand = (int)Random.Range(0.0f, (float)blobSplashSounds.Count - 1);
+
+			blobSplashSounds[rand].PlaySound();
+
+			StartCoroutine(DisableSquashSoundBool(2.0f));
+		}
+	}
+
+
+	private IEnumerator DisableSquashSoundBool(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		playingSquashSound = false;
+	}
+
+
+	public void PlayRandomPropSound()
+	{
+		if (!playingPropSound)
+		{
+			playingPropSound = true;
+
+			int rand = (int)Random.Range(0.0f, (float)propSounds.Count - 1);
+
+			propSounds[rand].PlaySound();
+
+			StartCoroutine(DisablePropSoundBool(2.0f));
+		}
+	}
+
+
+	private IEnumerator DisablePropSoundBool(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		playingPropSound = false;
 	}
 
 
