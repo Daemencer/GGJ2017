@@ -15,6 +15,8 @@ public class Shockwave
 
 		foreach (Collider col in colliders)
 		{
+			GameManager.Instance.PlayRandomPropSound();
+
 			Rigidbody rb = col.GetComponent<Rigidbody>();
 
 			rb.isKinematic = false;

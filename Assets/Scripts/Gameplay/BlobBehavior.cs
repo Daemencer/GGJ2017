@@ -15,7 +15,7 @@ public class BlobBehavior : MonoBehaviour
 	public void Action()
 	{
 		OnCreatureDeath.Invoke(score);
-
+		GameManager.Instance.PlayRandomBlobSquashSound();
 		Destroy(gameObject);
 	}
 

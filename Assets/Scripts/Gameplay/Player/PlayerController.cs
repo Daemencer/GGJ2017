@@ -48,11 +48,6 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			if (GameManager.Instance.CurrentGameState == GameState.RUNNING && canShoot)
-				FireShockwave(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
-		}
 	}
 
 
