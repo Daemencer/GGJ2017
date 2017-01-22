@@ -49,7 +49,7 @@ public class GameManager : MonoSingleton<GameManager>
 
 
 	#region Sounds
-	public List<SoundPlayer>
+
 	#endregion
 	#endregion
 
