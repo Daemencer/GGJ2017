@@ -32,7 +32,7 @@ public class BlobBehavior : MonoBehaviour
 		GameObject gao = GameObject.Instantiate(exploSprite, transform.position, Quaternion.identity);
 		gao.transform.position = transform.position;
 		gao.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
-		gao.transform.localScale = Vector3.one;
+		gao.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
 
 		StartCoroutine(DeleteCoroutine(gao, 1.0f));
 

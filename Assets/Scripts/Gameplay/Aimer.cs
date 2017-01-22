@@ -129,7 +129,7 @@ public class Aimer : MonoSingleton<Aimer>
 	private void Update()
 	{
 		// proceed to next phase if we press space
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) && canShoot && GameManager.Instance.CurrentGameState == GameState.RUNNING)
 		{
 			if (phase == AimPhase.FIRST || phase == AimPhase.SECOND)
 				Proceed();
