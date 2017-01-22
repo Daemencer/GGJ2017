@@ -67,10 +67,9 @@ public class Aimer : MonoSingleton<Aimer>
 			RaycastHit hit;
 			int layerMask = 1 << LayerMask.NameToLayer("Ground");
 
-			if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
+			if (Physics.Raycast(ray, out hit, 1000.0f, layerMask))
 			{
-				int explosionLayerMask = 1 << LayerMask.NameToLayer("Ground");
-				explosionLayerMask = ~explosionLayerMask;
+				int explosionLayerMask = 1 << LayerMask.NameToLayer("Prop");
 
 				Shockwave.Blast(hit.point, BlastRadius, BlastForce, BlastUpwardModifier, explosionLayerMask);
 

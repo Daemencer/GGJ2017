@@ -8,6 +8,11 @@ public class Shockwave
 	{
 		Collider[] colliders = Physics.OverlapSphere(epicenter, radius, layerMask);
 
+		if (colliders.Length == 0)
+		{
+			GameManager.Instance.HitNothing();
+		}
+
 		foreach (Collider col in colliders)
 		{
 			Rigidbody rb = col.GetComponent<Rigidbody>();
