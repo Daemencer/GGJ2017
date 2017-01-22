@@ -17,6 +17,8 @@ public class Shockwave
 		{
 			Rigidbody rb = col.GetComponent<Rigidbody>();
 
+			rb.isKinematic = false;
+
 			if (rb != null)
 				rb.AddExplosionForce(force, epicenter, radius, upwardModifier, ForceMode.Impulse);
 		}

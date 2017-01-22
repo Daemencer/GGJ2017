@@ -46,6 +46,11 @@ public class GameManager : MonoSingleton<GameManager>
 	private List<GameObject> spawnedObjects;
 
 	private List<GameObject> spawners;
+
+
+	#region Sounds
+	public List<SoundPlayer>
+	#endregion
 	#endregion
 
 	#region Properties
