@@ -8,7 +8,7 @@ public class DelayedAnimation2: MonoBehaviour {
 	{
 		Animator anim = GetComponent<Animator>();
 		anim.speed = Random.Range (0.0f, 2000.0f);
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(0.1f);
 		anim.speed = Random.Range (0.8f, 1.2f);
 		
 	}
