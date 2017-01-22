@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BlobFaces : MonoBehaviour {
-
-	private Animator anim;
+	[HideInInspector]
+	public Animator anim;
 
 	private IEnumerator WinkDelay()
 	{
