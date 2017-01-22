@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 520de669955398e43bf46c47a6b4b93e
+timeCreated: 1485087924
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Vanilla
+  fontNames:
+  - Vanilla
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
