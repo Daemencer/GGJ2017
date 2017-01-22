@@ -241,6 +241,8 @@ public class GameManager : MonoSingleton<GameManager>
 	private void Start()
 	{
 		OnSceneMovementEnd += CarnageDone;
+
+		SoundManager.Instance.PlayMusic();
 	}
 
 

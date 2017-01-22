@@ -25,6 +25,8 @@ public class Aimer : MonoSingleton<Aimer>
 	[SerializeField, Tooltip("Projector Movement Speed")]
 	private float speed;
 
+	public GameObject shockwaveParticle;
+
 	private float xDirection = 1.0f;
 	private float yDirection = 1.0f;
 
@@ -74,7 +76,8 @@ public class Aimer : MonoSingleton<Aimer>
 				Shockwave.Blast(hit.point, BlastRadius, BlastForce, BlastUpwardModifier, explosionLayerMask);
 
 				// the waves
-				//ground.GetComponent<CollisionScript>().Shockwave(ray);
+				GameObject gao = GameObject.Instantiate<GameObject>(shockwaveParticle);
+				gao.transform.position = hit.point;
 			}
 
 			GameManager.Instance.ShockwaveFired();
