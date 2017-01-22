@@ -74,7 +74,7 @@ public class Aimer : MonoSingleton<Aimer>
 				Shockwave.Blast(hit.point, BlastRadius, BlastForce, BlastUpwardModifier, explosionLayerMask);
 
 				// the waves
-				ground.GetComponent<CollisionScript>().Shockwave(ray);
+				//ground.GetComponent<CollisionScript>().Shockwave(ray);
 			}
 
 			GameManager.Instance.ShockwaveFired();
@@ -129,7 +129,7 @@ public class Aimer : MonoSingleton<Aimer>
 	private void Update()
 	{
 		// proceed to next phase if we press space
-		if (Input.GetKeyDown(KeyCode.F))
+		if (Input.GetKeyDown(KeyCode.Space) && canShoot && GameManager.Instance.CurrentGameState == GameState.RUNNING)
 		{
 			if (phase == AimPhase.FIRST || phase == AimPhase.SECOND)
 				Proceed();
