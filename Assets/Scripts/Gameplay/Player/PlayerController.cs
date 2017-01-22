@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+	public GameObject ground;
+
 	public Texture2D aimPointer;
 	public Material groundMat;
 
@@ -25,7 +27,7 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		Material material = Instantiate(groundMat) as Material;
-		GameObject.Find("Ground2").GetComponent<MeshRenderer>().material.mainTexture = material.mainTexture;
+		ground.GetComponent<MeshRenderer>().material.mainTexture = material.mainTexture;
 
 		crosshairWidth = aimPointer.width;
 		crosshairHeight = aimPointer.height;
