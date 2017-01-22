@@ -70,30 +70,4 @@ public class CollisionScript : MonoBehaviour
 			}
 		}
 	}
-
-	//void OnCollisionEnter(Collision col){
-	//	if (col.rigidbody)
-	//	{
-	//		waveNumber++;
-	//		if (waveNumber == 9){
-	//			waveNumber = 1;
-	//		}
-	//		waveAmplitude[waveNumber-1] = 0;
-	//		distance[waveNumber-1] = 0;
-
-	//		distanceX = this.transform.position.x - col.gameObject.transform.position.x;
-	//		distanceZ = this.transform.position.z - col.gameObject.transform.position.z;
-	//		impactPos[waveNumber - 1].x = col.transform.position.x;
-	//		impactPos[waveNumber - 1].y = col.transform.position.z;
-
-	//		GetComponent<Renderer>().material.SetFloat("_xImpact" + waveNumber, col.transform.position.x);
-	//		GetComponent<Renderer>().material.SetFloat("_zImpact" + waveNumber, col.transform.position.z);
-
-	//		GetComponent<Renderer>().material.SetFloat("_OffsetX" + waveNumber, distanceX / mesh.bounds.size.x * 2.5f);
-	//		GetComponent<Renderer>().material.SetFloat("_OffsetZ" + waveNumber, distanceZ / mesh.bounds.size.z * 2.5f);
-
-	//		GetComponent<Renderer>().material.SetFloat("_WaveAmplitude" + waveNumber, col.rigidbody.velocity.magnitude * magnitudeDivider);
-
-	//	}
-	//}
 }

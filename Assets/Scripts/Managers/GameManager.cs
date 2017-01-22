@@ -127,6 +127,13 @@ public class GameManager : MonoSingleton<GameManager>
 	}
 
 
+	public void HitNothing()
+	{
+		if (OnSceneMovementEnd != null)
+			OnSceneMovementEnd.Invoke();
+	}
+
+
 	private void CarnageDone()
 	{
 		if (CurrentShockwaveAmmo <= 0)
