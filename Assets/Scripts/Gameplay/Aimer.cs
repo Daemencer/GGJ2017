@@ -31,6 +31,7 @@ public class Aimer : MonoSingleton<Aimer>
 	private AimPhase phase;
 
 	[Header("Shockwave related stuff")]
+	public GameObject ground;
 	[SerializeField, Tooltip("How strong the blast will be")]
 	private float BlastForce = 30.0f;
 	[SerializeField, Tooltip("How big the blast radius will be")]
@@ -72,12 +73,16 @@ public class Aimer : MonoSingleton<Aimer>
 				explosionLayerMask = ~explosionLayerMask;
 
 				Shockwave.Blast(hit.point, BlastRadius, BlastForce, BlastUpwardModifier, explosionLayerMask);
+
+				// the waves
+				ground.GetComponent<CollisionScript>().Shockwave(ray);
 			}
 
 			GameManager.Instance.ShockwaveFired();
 
 			if (shockwaveSound != null)
 				shockwaveSound.PlaySound();
+
 		}
 	}
 
