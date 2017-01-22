@@ -248,7 +248,7 @@ public class GameManager : MonoSingleton<GameManager>
 	{
 		if (currentGameState == GameState.START)
 		{
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetMouseButtonDown(0))
 			{
 				if (OnGameBegins != null)
 					OnGameBegins(currentGameState);
@@ -258,7 +258,7 @@ public class GameManager : MonoSingleton<GameManager>
 		}
 		else if (currentGameState == GameState.OVER)
 		{
-			if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.R))
+			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.R))
 			{
 				Reset();
 

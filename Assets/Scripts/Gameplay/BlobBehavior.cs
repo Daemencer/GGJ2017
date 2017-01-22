@@ -16,7 +16,9 @@ public class BlobBehavior : MonoBehaviour
 
 	public void Action()
 	{
-		OnCreatureDeath.Invoke(score);
+		if (OnCreatureDeath != null)
+			OnCreatureDeath.Invoke(score);
+			
 		GameManager.Instance.PlayRandomBlobSquashSound();
 		StartCoroutine(DeathCoroutine());
 	}
@@ -28,7 +30,7 @@ public class BlobBehavior : MonoBehaviour
 		yield return new WaitForSeconds(1.0f);
 
 		GameObject gao = GameObject.Instantiate(exploSprite, transform.position, Quaternion.identity);
-		gao.transform.localPosition = Vector3.zero;
+		gao.transform.position = transform.position;
 		gao.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
 		gao.transform.localScale = Vector3.one;
 

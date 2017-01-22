@@ -16,9 +16,13 @@ public class BlobFaces : MonoBehaviour {
 	}
 
 
+	private void Awake()
+	{
+		anim = GetComponent<Animator>();
+	}
+
 	// Use this for initialization
 	void Start () {
-		anim = GetComponent<Animator>();
 		StartCoroutine(WinkDelay());
 	}
 	
