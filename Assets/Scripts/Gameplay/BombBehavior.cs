@@ -16,7 +16,7 @@ public class BombBehavior : MonoBehaviour
 			gao.transform.position = transform.position;
 
 			JuicePimp.Instance.ScreenShake(3.0f, 12.0f, 0.7f);
-			JuicePimp.Instance.SlowMotion(1.0f, 3.0f);
+			//JuicePimp.Instance.SlowMotion(1.0f, 3.0f);
 
 			Destroy(gameObject);
 		}
@@ -26,8 +26,7 @@ public class BombBehavior : MonoBehaviour
 	{
 		Vector3 explosionPos = transform.position;
 
-		int layerMaskExplosion = 1 << LayerMask.NameToLayer("Ground");
-		layerMaskExplosion = ~layerMaskExplosion;
+		int layerMaskExplosion = 1 << LayerMask.NameToLayer("Prop");
 
 		Collider[] colliders = Physics.OverlapSphere(explosionPos, 20.0f, layerMaskExplosion);
 
