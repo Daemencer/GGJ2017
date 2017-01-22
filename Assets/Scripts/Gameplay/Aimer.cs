@@ -136,14 +136,14 @@ public class Aimer : MonoSingleton<Aimer>
 				if (projector.transform.position.x >= 50.0f || projector.transform.position.x <= -50.0f)
 					xDirection *= -1.0f;
 
-				projector.transform.Translate(speed * Time.fixedDeltaTime * xDirection, 0.0f, 0.0f, Space.Self);
+				projector.transform.Translate(speed * Time.unscaledDeltaTime * xDirection, 0.0f, 0.0f, Space.Self);
 			}
 			else if (phase == AimPhase.SECOND)
 			{
 				if (projector.transform.localPosition.y >= 50.0f || projector.transform.localPosition.y <= -50.0f)
 					yDirection *= -1.0f;
 
-				projector.transform.Translate(new Vector3(0.0f, speed * Time.fixedDeltaTime * yDirection, 0.0f), Space.Self);
+				projector.transform.Translate(new Vector3(0.0f, speed * Time.unscaledDeltaTime * yDirection, 0.0f), Space.Self);
 			}
 		}
 	}

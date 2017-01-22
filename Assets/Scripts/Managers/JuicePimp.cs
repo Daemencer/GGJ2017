@@ -33,7 +33,7 @@ public class JuicePimp : MonoSingleton<JuicePimp>
 	{
 		float elapsed = 0.0f;
 
-		Vector3 originalCamPos = Camera.main.transform.position;
+		Vector3 originalCamPos = Camera.main.transform.parent.parent.position;
 		float randomStart = Random.Range(-1.0f, 1.0f);
 
 		while (elapsed < duration)
@@ -54,12 +54,12 @@ public class JuicePimp : MonoSingleton<JuicePimp>
 			y *= force * damper;
 			z *= force * damper;
 
-			Camera.main.transform.position = new Vector3(originalCamPos.x + x, originalCamPos.y + y, originalCamPos.z + z);
+			Camera.main.transform.parent.parent.position = new Vector3(originalCamPos.x + x, originalCamPos.y + y, originalCamPos.z + z);
 
 			yield return null;
 		}
 
-		Camera.main.transform.position = originalCamPos;
+		Camera.main.transform.parent.parent.position = originalCamPos;
 		shaking = false;
 	}
 

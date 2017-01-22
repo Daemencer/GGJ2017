@@ -22,10 +22,10 @@ public class PlayerMovement : MonoBehaviour
 	private float speed = 10.0f;
 
 	[SerializeField, Tooltip("Camera Angle")]
-	private float angle = 0.0f;
+	private float camAngle = 60.0f;
 
 	#region Private
-	private float camAngle = 60.0f;
+	private float angle = 0.0f;
 
 	private Transform initialTransform;
 	#endregion
@@ -49,13 +49,13 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (Input.GetKey(KeyCode.Q))
 		{
-			angle -= (speed * Time.fixedDeltaTime) % 360;
-			pivot.gameObject.transform.Rotate(Vector3.up, (speed * Time.deltaTime));
+			angle -= (speed * Time.unscaledDeltaTime) % 360;
+			//.gameObject.transform.Rotate(Vector3.up, (speed * Time.deltaTime));
 		}
 		else if (Input.GetKey(KeyCode.D))
 		{
-			angle += (speed * Time.fixedDeltaTime) % 360;
-			pivot.gameObject.transform.Rotate(Vector3.up, -(speed * Time.deltaTime));
+			angle += (speed * Time.unscaledDeltaTime) % 360;
+			//pivot.gameObject.transform.Rotate(Vector3.up, -(speed * Time.deltaTime));
 		}
 
 		float radAngle = (angle - 90.0f) * Mathf.Deg2Rad;
@@ -64,6 +64,13 @@ public class PlayerMovement : MonoBehaviour
 		float z = Mathf.Sin(radAngle) * radius;
 
 		pivot.transform.position = new Vector3(x, pivot.transform.position.y, z);
+
+		Quaternion newRotation = Quaternion.identity;
+		newRotation.SetLookRotation(new Vector3(0.0f, pivot.transform.position.y, 0.0f) - pivot.transform.position, Vector3.up);
+
+		pivot.transform.rotation = newRotation;
+
+		camera.transform.localPosition = Vector3.zero;
 	}
 
 
