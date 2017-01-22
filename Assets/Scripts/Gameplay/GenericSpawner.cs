@@ -25,7 +25,7 @@ public class GenericSpawner : MonoBehaviour
 		{
 			GameObject gao = GameObject.Instantiate(SpawnedPrefab, transform.position, Quaternion.identity) as GameObject;
 			gao.transform.rotation = transform.rotation;
-			gao.transform.localScale = Vector3.one;
+			gao.transform.localScale = transform.localScale;
 
 			GameManager.Instance.RegisterObject(gao);
 
