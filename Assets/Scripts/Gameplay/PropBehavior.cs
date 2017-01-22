@@ -28,7 +28,7 @@ public class PropBehavior : MonoBehaviour
 	{
 		if (!moving)
 		{
-			if (rb.velocity.magnitude >= 2.0f)
+			if (rb.velocity.magnitude >= 4.0f)
 			{
 				moving = true;
 
@@ -42,7 +42,7 @@ public class PropBehavior : MonoBehaviour
 		{
 			//Debug.Log(gameObject.name + " is moving at "+ rb.velocity);
 
-			if (rb.velocity.magnitude <= 2.0f)
+			if (rb.velocity.magnitude <= 4.0f)
 			{
 				moving = false;
 
@@ -55,11 +55,18 @@ public class PropBehavior : MonoBehaviour
 	}
 
 
+	private void OnDestroy()
+	{
+		if (OnObjectStop != null)
+			OnObjectStop.Invoke();
+	}
+
+
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.tag == "GarbageCollector")
 		{
-			OnObjectStop.Invoke();
+			//OnObjectStop.Invoke();
 			Destroy(gameObject);
 		}
 	}
